@@ -34,7 +34,7 @@ public class Order {
     @Column(name = "PRICE",
             nullable = false,
             precision = 6)
-    private double price; //999999.9999 // float | double | BigDecimal???
+    private float price; //999999.9999 // float | double | BigDecimal???
 
     @Column(name = "ORDER_DATETIME",
             nullable = false)
@@ -47,7 +47,7 @@ public class Order {
     private OrderStatus status;
 
     public Order(long id, long customerId, long productId, String productName, int quantity,
-                 double price, OrderStatus status) {
+                 float price, OrderStatus status) {
         this.id = id;
         this.customerId = customerId;
         this.productId = productId;
@@ -59,7 +59,7 @@ public class Order {
     }
 
     public Order(long customerId, long productId, String productName, int quantity,
-                 double price, OrderStatus status) {
+                 float price, OrderStatus status) {
         this.id = id;
         this.customerId = customerId;
         this.productId = productId;
@@ -113,11 +113,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

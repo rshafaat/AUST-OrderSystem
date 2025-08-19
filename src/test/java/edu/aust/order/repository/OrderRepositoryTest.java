@@ -30,11 +30,12 @@ class OrderRepositoryTest {
         fillUpData();
 
         // Action
-        //List<Order> orders = orderRepositoryTest.getOrdersCompletedAndLastDays(LocalDateTime.now().minusDays(30));
-        List<Order> orders = orderRepositoryTest.findAll();
+        List<Order> orders = orderRepositoryTest.getOrdersStatusAndLastDays(OrderStatus.NEW, LocalDateTime.now().minusDays(1));
+
         // Assert
         assertNotNull(orders);
         assertFalse(orders.isEmpty());
+        assertEquals(2, orders.size());
 
     }
     
@@ -44,11 +45,11 @@ class OrderRepositoryTest {
 
         List<Order> orders = new ArrayList<>();
 
-        orders.add(new Order(2020, 56789, "Mobile Phone", 100, 24999.9999, OrderStatus.COMPLETED));
-        orders.add(new Order(2020, 56790, "Smart TV", 10, 150000.0000, OrderStatus.COMPLETED));
-        orders.add(new Order(2021, 56789, "Mobile Phone", 150, 54999.9999, OrderStatus.COMPLETED));
-        orders.add(new Order(2021, 56790, "Smart TV", 50, 250000.0000, OrderStatus.COMPLETED));
-        orders.add(new Order(2022, 56789, "Mobile Phone", 1, 14999.9999, OrderStatus.COMPLETED));
+        orders.add(new Order(2020, 56789, "Mobile Phone", 100, 24999.9999f, OrderStatus.COMPLETED));
+        orders.add(new Order(2020, 56790, "Smart TV", 10, 150000.0000f, OrderStatus.NEW));
+        orders.add(new Order(2021, 56789, "Mobile Phone", 150, 54999.9999f, OrderStatus.COMPLETED));
+        orders.add(new Order(2021, 56790, "Smart TV", 50, 250000.0000f, OrderStatus.NEW));
+        orders.add(new Order(2022, 56789, "Mobile Phone", 1, 14999.9999f, OrderStatus.COMPLETED));
 
         orderRepositoryTest.saveAll(orders);
     }

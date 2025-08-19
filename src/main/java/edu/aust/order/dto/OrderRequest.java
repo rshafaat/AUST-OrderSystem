@@ -5,7 +5,7 @@ public record OrderRequest(
         long productId,
         String productName,
         int quantity,
-        double price,
+        float price,
         String status
 ) {
 

@@ -8,9 +8,9 @@ public record OrderResponse(
         long productId,
         String productName,
         int quantity,
-        double price,
+        float price,
         LocalDateTime orderDateTime,
-        double totalPrice
+        float totalPrice
 ) {
 }
 
