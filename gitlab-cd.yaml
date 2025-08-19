@@ -1,0 +1,20 @@
+stages:
+  - deploy
+
+deploy_staging:
+  stage: deploy
+  environment:
+    name: staging
+    url: https://staging.aust.com
+  script:
+    - kubectl apply -f k8s/deployment.yaml
+    - kubectl apply -f k8s/service.yaml
+
+deploy_production:
+  stage: deploy
+  environment:
+    name: staging
+    url: https://prod.aust.com
+  script:
+    - kubectl apply -f k8s/deployment.yaml
+    - kubectl apply -f k8s/service.yaml

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deployment
+  labels:
+    app: aust-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: aust-app
+  template:
+    metadata:
+      labels:
+        app: aust-app
+    spec:
+      containers:
+        - name: order-app-container
+          image: my-docker-registry/order-app:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:             # Minimum resources the pod needs
+              cpu: "250m"             # 0.25 of a CPU core (1000m means 1 full CPU core)
+              memory: "256Mi"         # Mi -> Mebibytes; Gi -> Gigibytes. which calculates exactly by multiples of 1024.
+            limits:               # Maximum resources the pod can use
+              cpu: "500m"             # 0.5 of a CPU core (1000m means 1 full CPU core)
+              memory: "512Mi"         # Mi -> Mebibytes; Gi -> Gigibytes. which calculates exactly by multiples of 1024.

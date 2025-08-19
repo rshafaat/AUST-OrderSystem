@@ -1,0 +1,25 @@
+stages:
+  - build
+  - test
+  - docker
+
+build_maven:
+  stage: build
+  script:
+    - echo "Building with Maven..."
+    - mvn clean package
+  artifacts:
+    paths:
+      - target/*.jar
+
+test_maven:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - mvn test
+
+build_image:
+  stage: docker
+  script:
+    - docker build -t registry/my-app:latest .
+    - docker push registry/my-app:latest
