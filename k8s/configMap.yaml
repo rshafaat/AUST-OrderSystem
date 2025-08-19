@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aust-order-config
+data:
+  order.history.status: "NEW"
+  order.history.daysAgo: 30

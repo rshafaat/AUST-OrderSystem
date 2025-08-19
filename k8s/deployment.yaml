@@ -26,3 +26,14 @@ spec:
             limits:               # Maximum resources the pod can use
               cpu: "500m"             # 0.5 of a CPU core (1000m means 1 full CPU core)
               memory: "512Mi"         # Mi -> Mebibytes; Gi -> Gigibytes. which calculates exactly by multiples of 1024.
+          env:
+            - name: HISTORY_STATUS
+              valueFrom:
+                configMapKeyRef:
+                  name: aust-order-config
+                  key: order.history.status
+            - name: HISTORY_DAYSAGO
+              valueFrom:
+                configMapKeyRef:
+                  name: aust-order-config
+                  key: order.history.daysAgo

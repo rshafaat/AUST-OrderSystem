@@ -6,6 +6,7 @@ import edu.aust.order.enums.OrderStatus;
 import edu.aust.order.exceptions.OrderNotFoundException;
 import edu.aust.order.models.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,12 @@ public class OrderServices {
 
     @Autowired
     OrderDao orderDao;
+
+    @Value("${app.order.history.status}")
+    private String historyStatus;
+
+    @Value("${app.order.history.daysAgo}")
+    private int historyDaysAgo;
 
     public List<OrderResponse> getAllOrders() {
         return OrderConverter.convert(orderDao.getAllOrders());
@@ -32,7 +39,7 @@ public class OrderServices {
     }
 
     public List<OrderResponse> getOrdersNewAndLast30Days() throws OrderNotFoundException {
-        return OrderConverter.convert(orderDao.getOrdersStatusAndLastDays(OrderStatus.NEW, LocalDateTime.now().minusDays(30)));
+        return OrderConverter.convert(orderDao.getOrdersStatusAndLastDays(OrderStatus.valueOf(historyStatus), LocalDateTime.now().minusDays(historyDaysAgo)));
     }
 
     public OrderResponse saveOrder(OrderRequest orderRequest) throws DataIntegrityViolationException {

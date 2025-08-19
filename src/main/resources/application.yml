@@ -2,6 +2,10 @@ spring:
   application:
     name: order
 
+server:
+  servlet:
+    context-path: /aust
+
 spring.jpa:
   database: POSTGRESQL
   hibernate.ddl-auto: update
@@ -13,3 +17,9 @@ spring.datasource:
   url: jdbc:postgresql://localhost:5432/postgres
   username: postgres
   password: 'aust1234'
+
+app:
+  order:
+    history:
+      status: ${HISTORY_STATUS}
+      daysAgo: ${HISTORY_DAYSAGO}
